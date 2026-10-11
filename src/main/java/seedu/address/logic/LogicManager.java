@@ -17,6 +17,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.logic.parser.AddressBookParser;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.Model;
+import seedu.address.model.ModelTransaction;
 import seedu.address.model.lesson.LessonId;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.PersonId;
@@ -46,9 +47,16 @@ public class LogicManager implements Logic {
      * Constructs a {@code LogicManager} with the given {@code Model} and {@code Storage}.
      */
     public LogicManager(Model model, Storage storage) {
+        this(model, storage, new AddressBookParser());
+    }
+
+    /**
+     * Constructs logic with a supplied parser for testing command transaction boundaries.
+     */
+    LogicManager(Model model, Storage storage, AddressBookParser addressBookParser) {
         this.model = model;
         this.storage = storage;
-        addressBookParser = new AddressBookParser();
+        this.addressBookParser = addressBookParser;
     }
 
     @Override
@@ -64,21 +72,20 @@ public class LogicManager implements Logic {
             // The protected session can display guidance and exit, but must never save operational data.
             return command.execute(model);
         }
-        commandResult = command.execute(model);
-
-        // These commands do not modify operational data and must work even when storage is unwritable.
-        if (command instanceof HelpCommand || command instanceof ListCommand || command instanceof ExitCommand) {
-            return commandResult;
-        }
+        ModelTransaction transaction = model.beginTransaction();
+        commandResult = command.execute(transaction.getStagedModel());
 
         try {
-            storage.saveAddressBook(model.getAddressBook());
+            if (transaction.hasOperationalChanges()) {
+                storage.saveModel(transaction.getStagedModel());
+            }
         } catch (AccessDeniedException e) {
             throw new CommandException(String.format(FILE_OPS_PERMISSION_ERROR_FORMAT, e.getMessage()), e);
         } catch (IOException ioe) {
             throw new CommandException(String.format(FILE_OPS_ERROR_FORMAT, ioe.getMessage()), ioe);
         }
 
+        transaction.commit();
         return commandResult;
     }
 

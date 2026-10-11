@@ -199,7 +199,8 @@ How the `Logic` component works:
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above for simplicity, the code can require several interactions between the command object and the `Model` to complete the operation.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+1. Commands execute against a staged model. Changed operational data is saved before the staged state is published; execution or save failures discard the staged state. See [Command transactions](#command-transactions).
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic` only after successful publication.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -363,9 +364,23 @@ recovery/temporary files can remain after failures or abrupt termination.
 The fallback permits saving on filesystems without atomic moves, but is not atomic: concurrent readers
 can observe an incomplete destination during replacement/recovery. Its guarantee is a recoverable old
 copy, not uninterrupted access at the original path. Neither path promises power-loss durability or
-preserves all previous file attributes. Save failures still do not roll back in-memory command changes;
-that is separate transaction work. Help, list and exit skip operational saving. Preferences retain
-their separate shutdown lifecycle. Future read-only commands must also bypass operational saving when activated.
+preserves all previous file attributes.
+
+#### Command transactions
+
+`LogicManager` obtains a `ModelTransaction` before executing a command. The command operates on an
+independent working model with the current people filter. It compares operational state against the
+pre-command snapshot and calls `Storage.saveModel` only when that state changed. Only after the save
+succeeds does it publish the staged data and view, then return the command result. Execution or save
+failure discards the staged model, leaving live records, order, filter and UI selection untouched.
+Publication updates existing observable lists so UI bindings continue to receive successful changes.
+Read-only commands and operational no-ops skip saving; view changes such as list still take effect.
+Protected startup retains its help/list/exit restriction. Preferences retain their shutdown lifecycle.
+
+The active implementation stages legacy people data. The canonical runtime adapter must implement
+`Model.beginTransaction` and `Storage.saveModel` together, including complete `PonHubDataState`, allocation
+counters/exhaustion, rosters, retained attendance and all active views. This seam does not itself activate
+the canonical runtime or its commands. Publication must not perform new validation or I/O.
 
 #### JSON version detection foundation
 
