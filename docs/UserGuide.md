@@ -347,7 +347,7 @@ The supported JSON format remains human-editable. Close PonHub and keep a backup
 
 At the first canonical-format cutover, unversioned AB3 contact data is treated as legacy data. PonHub must preserve it and reject loading it into the new store; it must not guess person roles, automatically migrate it or replace it with an empty dataset. Recovery requires a backup and a separate supported store, followed by manual re-entry. Creating that separate store is available only when the build provides documented protected initialization. This increment supplies no such setup command; an importer remains future work.
 
-The current inherited runtime uses `data/addressbook.json` with the [protected startup behavior](#data-protection-in-the-current-build) described above. Help, list and exit do not create or rewrite this file and remain available when operational saving would fail. Preferences are saved separately on shutdown. In normal sessions add/delete still save operational data; general rollback and canonical-format loading are not yet delivered. Back up existing files before upgrading or editing them.
+The current inherited runtime uses `data/addressbook.json` with the [protected startup behavior](#data-protection-in-the-current-build) described above. Help, list and exit do not create or rewrite this file and remain available when operational saving would fail. Preferences are saved separately on shutdown. In normal sessions add/delete still save operational data; failed execution or saving leaves the previous people data and view unchanged. Canonical-format loading is not yet delivered. Back up existing files before upgrading or editing them.
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -387,3 +387,13 @@ These formats use the [planned command conventions](#reading-the-planned-command
 | Exit | `exit` |
 
 Capacity, waiting lists, make-ups, fees, lesson editing, occurrence cancellation and undo/redo are future scope. So are exports, saved or guided searches, alternative or exclusion search conditions, archives, late/excused attendance, notes, bulk/clickable attendance and attendance percentages. The full relationship-filter matrix above remains part of the planned integration target. The current build's supported commands are listed in [Current command summary](#current-command-summary).
+
+
+### Checking unsuccessful saves in the current build
+
+On a disposable copy, note the people list and make the operational data location unwritable for the
+app's account. Attempt a valid add or delete. The app should report a save error, retain the previous
+people and view, and display no success message. Run `list`: a rejected addition must not appear and a
+rejected deletion must still be present. Restore write access and perform a valid change; restart and
+check that only the successful change was saved. Automated tests inject storage failures without
+changing filesystem permissions, including a deletion from a filtered people view.

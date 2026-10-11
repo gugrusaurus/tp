@@ -199,7 +199,8 @@ How the `Logic` component works:
 1. This results in a `Command` object (more precisely, an object of one of its subclasses e.g., `DeleteCommand`) which is executed by the `LogicManager`.
 1. The command can communicate with the `Model` when it is executed (e.g. to delete a person).<br>
    Note that although this is shown as a single step in the diagram above for simplicity, the code can require several interactions between the command object and the `Model` to complete the operation.
-1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic`.
+1. Commands execute against a staged model. Changed operational data is saved before the staged state is published; execution or save failures discard the staged state. See [Command transactions](#command-transactions).
+1. The result of the command execution is encapsulated as a `CommandResult` object which is returned from `Logic` only after successful publication.
 
 Here are the other classes in `Logic` (omitted from the class diagram above) that are used for parsing a user command:
 
@@ -363,9 +364,23 @@ recovery/temporary files can remain after failures or abrupt termination.
 The fallback permits saving on filesystems without atomic moves, but is not atomic: concurrent readers
 can observe an incomplete destination during replacement/recovery. Its guarantee is a recoverable old
 copy, not uninterrupted access at the original path. Neither path promises power-loss durability or
-preserves all previous file attributes. Save failures still do not roll back in-memory command changes;
-that is separate transaction work. Help, list and exit skip operational saving. Preferences retain
-their separate shutdown lifecycle. Future read-only commands must also bypass operational saving when activated.
+preserves all previous file attributes.
+
+#### Command transactions
+
+`LogicManager` obtains a `ModelTransaction` before executing a command. The command operates on an
+independent working model with the current people filter. It compares operational state against the
+pre-command snapshot and calls `Storage.saveModel` only when that state changed. Only after the save
+succeeds does it publish the staged data and view, then return the command result. Execution or save
+failure discards the staged model, leaving live records, order, filter and UI selection untouched.
+Publication updates existing observable lists so UI bindings continue to receive successful changes.
+Read-only commands and operational no-ops skip saving; view changes such as list still take effect.
+Protected startup retains its help/list/exit restriction. Preferences retain their shutdown lifecycle.
+
+The active implementation stages legacy people data. The canonical runtime adapter must implement
+`Model.beginTransaction` and `Storage.saveModel` together, including complete `PonHubDataState`, allocation
+counters/exhaustion, rosters, retained attendance and all active views. This seam does not itself activate
+the canonical runtime or its commands. Publication must not perform new validation or I/O.
 
 #### JSON version detection foundation
 
@@ -1326,3 +1341,32 @@ These checks apply when canonical-format loading is activated. The current inher
 4. Capture each rejected file's bytes, then attempt help/list/exit and a data mutation wherever the failure state permits them. The rejected operational bytes must remain identical, and mutations must be blocked. If startup exits safely instead, verify it reports the reason and performs no operational write. Preferences are checked separately.
 5. Test an unversioned AB3 file and formerly accepted contacts rejected by #61. Expect no guessed roles, silent conversion, record dropping or empty writable fallback. Follow the backup/manual re-entry guidance in a separate empty folder with explicitly chosen roles. Verify only the new supported root is writable and that the old file and preserved backup remain unchanged.
 6. Correct an invalid supported file on a working copy while the app is closed, then restart and verify complete validation succeeds. If recovery uses an older build for inspection, use another working copy rather than the preserved original or backup. Record actual outcomes and the implemented error/recovery path in the UG/DG when this feature lands; no importer or recovery command is assumed.
+
+
+### Prepared canonical transaction handoff (#82)
+
+`PeopleView.beginTransaction()` creates a `CanonicalTransaction` from the view's own canonical root,
+so staged person-index resolution and staged operational data share one source. It copies the current
+role filter and retains the complete immutable `PonHubDataState`, including deleted-ID allocation
+history, exhaustion, lesson rosters and retained attendance. Operational equality includes counters.
+
+`CanonicalCommandExecutor` accepts that live view, a complete snapshot writer, and the authoritative
+protected-session error supplier. A staged command receives only the working aggregate and working
+view. Resolve a displayed index once with `PersonIndexResolver`, prepare changes (for example with
+`PersonAdditionCandidate`), and set the staged filter as needed. The executor saves changed state
+before installing it or returning success. Failures never refresh the live list; successful publication
+refreshes its existing observable projection. Unchanged data skips storage, and unchanged views are
+not refreshed, preserving selection for help/history and identical-status no-ops.
+
+For #85, invoke this boundary from the single canonical runtime adapter; do not construct another live
+writable store or activate it beside the legacy model. For #84, supply its protected-session guidance
+and protected writer, and enforce the help/list/exit-only catalogue before dispatch. The guard here
+also rejects any staged operational change while loading is protected. Wire `JsonPonHubDataStorage`
+through that protected adapter. Its current codec rejects nonempty lessons/attendance: keep those
+commands gated until #81/#83 provide compatible codecs. Never strip unsupported collections to save.
+
+Regression tests exercise the real aggregate, addition candidate, filtered view, people codec/reload,
+failed-save retry without consuming an ID, retained attendance, roster changes, protected writes,
+unsupported collection rejection, and JavaFX card selection at filtered index 1 with stable ID S7.
+These prepared components do not activate the application router. Teammate agreement on this handoff,
+review/merge and final integrated-runtime verification remain release coordination work.

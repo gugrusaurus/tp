@@ -14,6 +14,14 @@ public interface Model {
     Predicate<Person> PREDICATE_SHOW_ALL_PERSONS = unused -> true;
 
     /**
+     * Starts an isolated command transaction, including operational data and visible view state.
+     * Implementations must include every collection and allocation counter in their change comparison.
+     */
+    default ModelTransaction<Model> beginTransaction() {
+        throw new UnsupportedOperationException("This model does not support command transactions");
+    }
+
+    /**
      * Returns the user prefs.
      */
     ReadOnlyUserPrefs getUserPrefs();
