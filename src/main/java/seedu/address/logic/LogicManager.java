@@ -72,7 +72,7 @@ public class LogicManager implements Logic {
             // The protected session can display guidance and exit, but must never save operational data.
             return command.execute(model);
         }
-        ModelTransaction transaction = model.beginTransaction();
+        ModelTransaction<Model> transaction = model.beginTransaction();
         commandResult = command.execute(transaction.getStagedModel());
 
         try {

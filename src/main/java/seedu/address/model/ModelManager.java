@@ -40,11 +40,11 @@ public class ModelManager implements Model {
     }
 
     @Override
-    public ModelTransaction beginTransaction() {
+    public ModelTransaction<Model> beginTransaction() {
         AddressBook before = new AddressBook(addressBook);
         ModelManager staged = new ModelManager(before, userPrefs);
         staged.filteredPersons.setPredicate(filteredPersons.getPredicate());
-        return new ModelTransaction() {
+        return new ModelTransaction<>() {
             @Override
             public Model getStagedModel() {
                 return staged;

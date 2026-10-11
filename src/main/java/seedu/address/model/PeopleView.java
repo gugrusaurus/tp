@@ -38,6 +38,13 @@ public final class PeopleView {
         return readOnlyPeople;
     }
 
+    /**
+     * Starts a transaction over this view and its single canonical root.
+     */
+    public CanonicalTransaction beginTransaction() {
+        return new CanonicalTransaction(source, this);
+    }
+
     public Optional<PersonRole> getRoleFilter() {
         return roleFilter;
     }

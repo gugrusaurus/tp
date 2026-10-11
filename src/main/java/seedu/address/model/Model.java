@@ -17,7 +17,7 @@ public interface Model {
      * Starts an isolated command transaction, including operational data and visible view state.
      * Implementations must include every collection and allocation counter in their change comparison.
      */
-    default ModelTransaction beginTransaction() {
+    default ModelTransaction<Model> beginTransaction() {
         throw new UnsupportedOperationException("This model does not support command transactions");
     }
 

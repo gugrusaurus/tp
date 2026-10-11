@@ -174,10 +174,10 @@ public class LogicTransactionTest {
         }
 
         @Override
-        public ModelTransaction beginTransaction() {
+        public ModelTransaction<Model> beginTransaction() {
             PonHubDataState before = state;
             AggregateModel staged = new AggregateModel(before);
-            return new ModelTransaction() {
+            return new ModelTransaction<>() {
                 @Override
                 public Model getStagedModel() {
                     return staged;

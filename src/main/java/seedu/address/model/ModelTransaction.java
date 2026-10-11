@@ -3,12 +3,14 @@ package seedu.address.model;
 /**
  * An isolated working model for one command on the application's model thread.
  * Discarding a transaction must leave live data, counters and views untouched.
+ *
+ * @param <T> The working model type.
  */
-public interface ModelTransaction {
+public interface ModelTransaction<T> {
     /**
      * Returns the working model against which the command executes.
      */
-    Model getStagedModel();
+    T getStagedModel();
 
     /**
      * Returns whether complete operational state differs from the pre-command snapshot.

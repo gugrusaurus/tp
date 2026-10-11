@@ -1341,3 +1341,32 @@ These checks apply when canonical-format loading is activated. The current inher
 4. Capture each rejected file's bytes, then attempt help/list/exit and a data mutation wherever the failure state permits them. The rejected operational bytes must remain identical, and mutations must be blocked. If startup exits safely instead, verify it reports the reason and performs no operational write. Preferences are checked separately.
 5. Test an unversioned AB3 file and formerly accepted contacts rejected by #61. Expect no guessed roles, silent conversion, record dropping or empty writable fallback. Follow the backup/manual re-entry guidance in a separate empty folder with explicitly chosen roles. Verify only the new supported root is writable and that the old file and preserved backup remain unchanged.
 6. Correct an invalid supported file on a working copy while the app is closed, then restart and verify complete validation succeeds. If recovery uses an older build for inspection, use another working copy rather than the preserved original or backup. Record actual outcomes and the implemented error/recovery path in the UG/DG when this feature lands; no importer or recovery command is assumed.
+
+
+### Prepared canonical transaction handoff (#82)
+
+`PeopleView.beginTransaction()` creates a `CanonicalTransaction` from the view's own canonical root,
+so staged person-index resolution and staged operational data share one source. It copies the current
+role filter and retains the complete immutable `PonHubDataState`, including deleted-ID allocation
+history, exhaustion, lesson rosters and retained attendance. Operational equality includes counters.
+
+`CanonicalCommandExecutor` accepts that live view, a complete snapshot writer, and the authoritative
+protected-session error supplier. A staged command receives only the working aggregate and working
+view. Resolve a displayed index once with `PersonIndexResolver`, prepare changes (for example with
+`PersonAdditionCandidate`), and set the staged filter as needed. The executor saves changed state
+before installing it or returning success. Failures never refresh the live list; successful publication
+refreshes its existing observable projection. Unchanged data skips storage, and unchanged views are
+not refreshed, preserving selection for help/history and identical-status no-ops.
+
+For #85, invoke this boundary from the single canonical runtime adapter; do not construct another live
+writable store or activate it beside the legacy model. For #84, supply its protected-session guidance
+and protected writer, and enforce the help/list/exit-only catalogue before dispatch. The guard here
+also rejects any staged operational change while loading is protected. Wire `JsonPonHubDataStorage`
+through that protected adapter. Its current codec rejects nonempty lessons/attendance: keep those
+commands gated until #81/#83 provide compatible codecs. Never strip unsupported collections to save.
+
+Regression tests exercise the real aggregate, addition candidate, filtered view, people codec/reload,
+failed-save retry without consuming an ID, retained attendance, roster changes, protected writes,
+unsupported collection rejection, and JavaFX card selection at filtered index 1 with stable ID S7.
+These prepared components do not activate the application router. Teammate agreement on this handoff,
+review/merge and final integrated-runtime verification remain release coordination work.
