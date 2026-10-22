@@ -1,0 +1,65 @@
+{
+  "schemaVersion" : 1,
+  "people" : [ {
+    "id" : "T1",
+    "role" : "TUTOR",
+    "name" : "Mei Chen",
+    "phone" : "92345678",
+    "email" : "mei@example.com"
+  }, {
+    "id" : "S1",
+    "role" : "STUDENT",
+    "name" : "Alex Lee",
+    "phone" : "93456789",
+    "email" : "alex@example.com",
+    "level" : "P3",
+    "parentPhone" : "91234568"
+  }, {
+    "id" : "S2",
+    "role" : "STUDENT",
+    "name" : "Jamie Tan",
+    "level" : "P1",
+    "parentPhone" : "91234567"
+  }, {
+    "id" : "P1",
+    "role" : "PARENT",
+    "name" : "Pat Tan",
+    "phone" : "91234568"
+  } ],
+  "personCounters" : {
+    "STUDENT" : 2,
+    "TUTOR" : 1,
+    "PARENT" : 1
+  },
+  "lastAllocatedLessonSequence" : 2,
+  "lessons" : [ {
+    "id" : "L1",
+    "tutorId" : "T1",
+    "day" : "Mon",
+    "startTime" : "1630",
+    "endTime" : "1730",
+    "subject" : "Algebra",
+    "room" : "R4",
+    "enrolledStudentIds" : [ "S2" ]
+  }, {
+    "id" : "L2",
+    "tutorId" : "T1",
+    "day" : "Mon",
+    "startTime" : "1730",
+    "endTime" : "1830",
+    "subject" : "Science",
+    "room" : "R2",
+    "enrolledStudentIds" : [ ]
+  } ],
+  "attendance" : [ {
+    "studentId" : "S1",
+    "lessonId" : "L1",
+    "date" : "2026-10-05",
+    "status" : "absent"
+  }, {
+    "studentId" : "S2",
+    "lessonId" : "L1",
+    "date" : "2026-10-05",
+    "status" : "absent"
+  } ]
+}
