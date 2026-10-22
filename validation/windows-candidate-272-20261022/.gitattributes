@@ -1,0 +1,4 @@
+before-rejections.json -text -diff
+before-restart.json -text -diff
+before-final-restart.json -text -diff
+final-state.json -text -diff
