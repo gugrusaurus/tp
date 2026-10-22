@@ -1,0 +1,3 @@
+#!/bin/sh
+cd /private/tmp/mac-candidate-272-20261022/session
+exec /Users/gugrusaurus/.sdkman/candidates/java/25.0.3.fx-zulu/bin/java -ea -Xdock:name=MacCandidateAcceptance -jar ponhub.jar >> ../evidence/mac-native.log 2>&1

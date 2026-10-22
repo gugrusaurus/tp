@@ -1,0 +1,80 @@
+[
+  {
+    "file": "01-startup-help.png",
+    "width_pixels": 4718592,
+    "height_pixels": 4292935744,
+    "sha256": "00213ac3c50d3e49e6f7e6a601b468be8feb8a694d1c5d176253ac5c24ae406f"
+  },
+  {
+    "file": "02-shared-attendance.png",
+    "width_pixels": 4718592,
+    "height_pixels": 4292935744,
+    "sha256": "0410b5b71db77a2a0b89cd729a975de96109709fc24bc17f8b658cc07bfcc273"
+  },
+  {
+    "file": "03-person-edit.png",
+    "width_pixels": 4718592,
+    "height_pixels": 4292935744,
+    "sha256": "15264dd6b7be1093db8c8eb54efbd634a4018536af902c09619859ca582327a0"
+  },
+  {
+    "file": "04-lesson-and-tutor-edit.png",
+    "width_pixels": 4718592,
+    "height_pixels": 4292935744,
+    "sha256": "bbbe55aa64eed30db783036ccfcfba70f75a455f147362c71f0221f7ac4a6799"
+  },
+  {
+    "file": "05-rejection-noop.png",
+    "width_pixels": 4718592,
+    "height_pixels": 4292935744,
+    "sha256": "ff16354c988aae671c23bda0886227e724d95ecc2d92df9b903eec749af9fc67"
+  },
+  {
+    "file": "06-parent-relationship.png",
+    "width_pixels": 4718592,
+    "height_pixels": 4292935744,
+    "sha256": "23ff633adcc2606e2ad1ae67d0bfb85be4f04d9ab51a16ba19a902b408c6938b"
+  },
+  {
+    "file": "07-former-history.png",
+    "width_pixels": 4718592,
+    "height_pixels": 4292935744,
+    "sha256": "fb73b5fc7e4173af9675dac6b6d140deae8e7c3d5bf84e45b6e6ab5e7023d204"
+  },
+  {
+    "file": "08-f1-preserves-draft-history.png",
+    "width_pixels": 4718592,
+    "height_pixels": 4292935744,
+    "sha256": "ba8c16f9613c4d42f95adb0fee279d27a4660c94bb78b49f02c1729b4adf0e7f"
+  },
+  {
+    "file": "09-zoomed-history.png",
+    "width_pixels": 4718592,
+    "height_pixels": 4292935744,
+    "sha256": "5d0ac9014622ece8cead670cf96a371b1a5e4b4666e3fa6a0de7325029d1359d"
+  },
+  {
+    "file": "10-restarted-lesson.png",
+    "width_pixels": 4718592,
+    "height_pixels": 4292935744,
+    "sha256": "e13c76e6a5f4fdeb256f91c2bd891e5a82ff4a47c7aadf660dddcfc7731ef47a"
+  },
+  {
+    "file": "11-restarted-history.png",
+    "width_pixels": 4718592,
+    "height_pixels": 4292935744,
+    "sha256": "baee7dff25c4aff679dc85b240caeea06ef22ee17b651815622fb8fe0c9722b9"
+  },
+  {
+    "file": "12-failed-save.png",
+    "width_pixels": 4718592,
+    "height_pixels": 4292935744,
+    "sha256": "4aea09bd3fa40946153e56d162decb2d94180f5139a5cc4157bdc048486859ee"
+  },
+  {
+    "file": "13-protected-warning.png",
+    "width_pixels": 4718592,
+    "height_pixels": 4292935744,
+    "sha256": "7f6382d6cff237c6eef0673e1b90dbd624807e147caa15b853492969182d418a"
+  }
+]

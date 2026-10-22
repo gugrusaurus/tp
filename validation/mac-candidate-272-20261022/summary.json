@@ -1,0 +1,17 @@
+{
+  "source": "ed32fe49901ea11070ff16086490d2d72adafcd1",
+  "jar_sha256": "5e24df511c9a5975c1c15e310ab03f2a852837e969359afe71fc8a37fa905456",
+  "core_native_workflow": "PASS",
+  "save_failure_and_retry": "PASS",
+  "corrupt_startup_warning": "OBSERVED",
+  "corrupt_session_interaction": "INCOMPLETE: native automation timed out after warning dismissal",
+  "shutdown": "Main flow exited and restarted; detached-main-thread exception after second exit retained for review",
+  "help_menu": "PASS: Vincent manual click; Codex screenshot/AX inspection",
+  "display": "Default 740x600 logical window and native zoom inspected; no OS scale changes or full scaling matrix",
+  "screenshots": 13,
+  "transcript_records": 52,
+  "jar_after_hash_matches": true,
+  "retry_summary": "retry/summary.json",
+  "latest_protected_session": "PASS including restore/restart recovery",
+  "latest_shutdown": "Four exits passed without recurrence; original intermittent diagnostic retained"
+}

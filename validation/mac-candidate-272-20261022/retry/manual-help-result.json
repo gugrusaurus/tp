@@ -1,0 +1,15 @@
+{
+  "result": "PASS",
+  "operator": "Vincent manually clicked Help > Help and confirmed the click in chat; Codex inspected the resulting window",
+  "catalogue_visible": true,
+  "unfinished_command_preserved": "edit 1 n/Unfinished",
+  "people_view_preserved": "Two Students",
+  "history_preserved": "Student S1 / L1 / 2026-10-05 / absent / former enrolment",
+  "operational_bytes_unchanged": true,
+  "source": "ed32fe49901ea11070ff16086490d2d72adafcd1",
+  "jar_sha256": "5e24df511c9a5975c1c15e310ab03f2a852837e969359afe71fc8a37fa905456",
+  "evidence": [
+    "manual-help-menu.png",
+    "manual-help-ax.txt"
+  ]
+}

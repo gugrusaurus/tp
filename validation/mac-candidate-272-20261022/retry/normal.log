@@ -1,0 +1,69 @@
+Oct 22, 2026 11:00:00 AM ponhub.Main main
+WARNING: The warnings about a 'restricted method in java.lang.System' and 'enabling native access' appearing below (if any) can be ignored.
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by com.sun.glass.utils.NativeLibLoader in module javafx.graphics (jrt:/javafx.graphics)
+WARNING: Use --enable-native-access=javafx.graphics to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+sandbox_extension_issue_file_to_process failed for /tmp/mac-candidate-272-20261022/retry/Mac272RetryNormal.app: 1 (Operation not permitted)
+Oct 22, 2026 11:00:00 AM ponhub.MainApp init
+INFO: =============================[ Initializing PonHub ]===========================
+Oct 22, 2026 11:00:00 AM ponhub.MainApp initialize
+INFO: Using canonical data file : /private/tmp/mac-candidate-272-20261022/retry/normal/data/ponhub.json
+Oct 22, 2026 11:00:00 AM ponhub.MainApp initPrefs
+INFO: Using preference file : /private/tmp/mac-candidate-272-20261022/retry/normal/preferences.json
+Oct 22, 2026 11:00:00 AM ponhub.MainApp initPrefs
+INFO: Creating new preference file /private/tmp/mac-candidate-272-20261022/retry/normal/preferences.json
+Oct 22, 2026 11:00:00 AM ponhub.MainApp start
+INFO: Starting PonHub v1.4
+Oct 22, 2026 11:00:00 AM ponhub.ui.UiManager start
+INFO: Starting UI...
+Oct 22, 2026 11:00:10 AM ponhub.logic.CanonicalLogicManager execute
+INFO: ----------------[USER COMMAND][list r/student]
+Oct 22, 2026 11:00:10 AM ponhub.ui.MainWindow executeCommand
+INFO: Result: Showing 2 student(s).
+Oct 22, 2026 11:00:11 AM ponhub.logic.CanonicalLogicManager execute
+INFO: ----------------[USER COMMAND][history 1 lid/L1]
+Oct 22, 2026 11:00:11 AM ponhub.ui.MainWindow executeCommand
+INFO: Result: Showing 1 attendance record(s).
+Oct 22, 2026 11:00:55 AM ponhub.logic.CanonicalLogicManager execute
+INFO: ----------------[USER COMMAND][exit]
+Oct 22, 2026 11:00:55 AM ponhub.ui.MainWindow executeCommand
+INFO: Result: Exiting PonHub as requested ...
+Oct 22, 2026 11:00:55 AM ponhub.MainApp stop
+INFO: ============================ [ Stopping PonHub ] =============================
+Oct 22, 2026 11:01:10 AM ponhub.Main main
+WARNING: The warnings about a 'restricted method in java.lang.System' and 'enabling native access' appearing below (if any) can be ignored.
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by com.sun.glass.utils.NativeLibLoader in module javafx.graphics (jrt:/javafx.graphics)
+WARNING: Use --enable-native-access=javafx.graphics to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+sandbox_extension_issue_file_to_process failed for /tmp/mac-candidate-272-20261022/retry/Mac272RetryNormal.app: 1 (Operation not permitted)
+Oct 22, 2026 11:01:10 AM ponhub.MainApp init
+INFO: =============================[ Initializing PonHub ]===========================
+Oct 22, 2026 11:01:10 AM ponhub.MainApp initialize
+INFO: Using canonical data file : /private/tmp/mac-candidate-272-20261022/retry/normal/data/ponhub.json
+Oct 22, 2026 11:01:10 AM ponhub.MainApp initPrefs
+INFO: Using preference file : /private/tmp/mac-candidate-272-20261022/retry/normal/preferences.json
+Oct 22, 2026 11:01:10 AM ponhub.commons.util.JsonUtil readJsonFile
+INFO: JSON file /private/tmp/mac-candidate-272-20261022/retry/normal/preferences.json found.
+Oct 22, 2026 11:01:10 AM ponhub.MainApp start
+INFO: Starting PonHub v1.4
+Oct 22, 2026 11:01:10 AM ponhub.ui.UiManager start
+INFO: Starting UI...
+Oct 22, 2026 11:01:19 AM ponhub.logic.CanonicalLogicManager execute
+INFO: ----------------[USER COMMAND][help edit]
+Oct 22, 2026 11:01:19 AM ponhub.ui.MainWindow executeCommand
+INFO: Result: Usage: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [l/LEVEL] [pp/PARENT_PHONE]
+Use the current displayed people position and at least one field; omitted fields stay unchanged.
+Only Students accept l/ and pp/. Blank e/ or a/ clears that value; blank p/ clears only a Student's phone.
+Names, Student levels/parent phones and Tutor/Parent phones cannot be cleared. Role and ID stay fixed.
+Filters are retained and search results refresh. Recheck displayed positions after editing.
+An identical edit makes no write. Example: list r/student, then edit 1 l/P2 e/
+Oct 22, 2026 11:01:19 AM ponhub.logic.CanonicalLogicManager execute
+INFO: ----------------[USER COMMAND][exit]
+Oct 22, 2026 11:01:19 AM ponhub.ui.MainWindow executeCommand
+INFO: Result: Exiting PonHub as requested ...
+Oct 22, 2026 11:01:19 AM ponhub.MainApp stop
+INFO: ============================ [ Stopping PonHub ] =============================

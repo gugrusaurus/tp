@@ -1,0 +1,116 @@
+Oct 22, 2026 11:02:04 AM ponhub.Main main
+WARNING: The warnings about a 'restricted method in java.lang.System' and 'enabling native access' appearing below (if any) can be ignored.
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by com.sun.glass.utils.NativeLibLoader in module javafx.graphics (jrt:/javafx.graphics)
+WARNING: Use --enable-native-access=javafx.graphics to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+sandbox_extension_issue_file_to_process failed for /tmp/mac-candidate-272-20261022/retry/Mac272RetryProtected.app: 1 (Operation not permitted)
+Oct 22, 2026 11:02:05 AM ponhub.MainApp init
+INFO: =============================[ Initializing PonHub ]===========================
+Oct 22, 2026 11:02:05 AM ponhub.MainApp initialize
+INFO: Using canonical data file : /private/tmp/mac-candidate-272-20261022/retry/protected/data/ponhub.json
+Oct 22, 2026 11:02:05 AM java.util.Optional ifPresent
+WARNING: Could not load canonical data at /private/tmp/mac-candidate-272-20261022/retry/protected/data/ponhub.json (CORRUPT). The original file has not been changed. Operational writes are blocked for this session; only help, list and exit should be available. An empty view is not your saved data. Back up the original file. Restore a known-good supported file, correct its JSON/access permissions, or use a compatible build on a separate copy, then restart. Do not delete the original to bypass protection. Cause: Invalid JSON format: MALFORMED_JSON
+Oct 22, 2026 11:02:05 AM ponhub.MainApp initPrefs
+INFO: Using preference file : /private/tmp/mac-candidate-272-20261022/retry/protected/preferences.json
+Oct 22, 2026 11:02:05 AM ponhub.MainApp initPrefs
+INFO: Creating new preference file /private/tmp/mac-candidate-272-20261022/retry/protected/preferences.json
+Oct 22, 2026 11:02:05 AM ponhub.MainApp start
+INFO: Starting PonHub v1.4
+Oct 22, 2026 11:02:05 AM ponhub.ui.UiManager start
+INFO: Starting UI...
+Oct 22, 2026 11:02:16 AM ponhub.logic.CanonicalLogicManager execute
+INFO: ----------------[USER COMMAND][help]
+Oct 22, 2026 11:02:16 AM ponhub.ui.MainWindow executeCommand
+INFO: Result: PonHub commands available in this build:
+help - Show help or one command's guidance
+Usage: help [COMMAND]
+Shows the commands available in this session, or syntax and an example for one command.
+COMMAND is optional and case-insensitive. Supply at most one command word.
+Examples: help, help list
+
+list - Show all people or one role
+Use list or list r/student|tutor|parent, with at most one role filter.
+
+exit - Close PonHub
+Usage: exit
+Closes PonHub. No parameters.
+Example: exit
+
+
+Type help COMMAND for syntax and an example, e.g. help list.
+
+Could not load canonical data at /private/tmp/mac-candidate-272-20261022/retry/protected/data/ponhub.json (CORRUPT). The original file has not been changed. Operational writes are blocked for this session; only help, list and exit should be available. An empty view is not your saved data. Back up the original file. Restore a known-good supported file, correct its JSON/access permissions, or use a compatible build on a separate copy, then restart. Do not delete the original to bypass protection. Cause: Invalid JSON format: MALFORMED_JSON
+
+Scroll this Result Display to read long guidance.
+Oct 22, 2026 11:02:22 AM ponhub.logic.CanonicalLogicManager execute
+INFO: ----------------[USER COMMAND][edit 1 n/Blocked]
+Oct 22, 2026 11:02:22 AM ponhub.ui.MainWindow executeCommand
+INFO: An error occurred while executing command: edit 1 n/Blocked
+Oct 22, 2026 11:02:23 AM ponhub.logic.CanonicalLogicManager execute
+INFO: ----------------[USER COMMAND][add r/tutor n/Blocked Tutor p/92345678]
+Oct 22, 2026 11:02:23 AM ponhub.ui.MainWindow executeCommand
+INFO: An error occurred while executing command: add r/tutor n/Blocked Tutor p/92345678
+Oct 22, 2026 11:02:23 AM ponhub.logic.CanonicalLogicManager execute
+INFO: ----------------[USER COMMAND][editlesson lid/L1 s/Blocked]
+Oct 22, 2026 11:02:23 AM ponhub.ui.MainWindow executeCommand
+INFO: An error occurred while executing command: editlesson lid/L1 s/Blocked
+Oct 22, 2026 11:02:24 AM ponhub.logic.CanonicalLogicManager execute
+INFO: ----------------[USER COMMAND][list]
+Oct 22, 2026 11:02:24 AM ponhub.ui.MainWindow executeCommand
+INFO: Result: Showing 0 person(s).
+
+Could not load canonical data at /private/tmp/mac-candidate-272-20261022/retry/protected/data/ponhub.json (CORRUPT). The original file has not been changed. Operational writes are blocked for this session; only help, list and exit should be available. An empty view is not your saved data. Back up the original file. Restore a known-good supported file, correct its JSON/access permissions, or use a compatible build on a separate copy, then restart. Do not delete the original to bypass protection. Cause: Invalid JSON format: MALFORMED_JSON
+Oct 22, 2026 11:02:58 AM ponhub.logic.CanonicalLogicManager execute
+INFO: ----------------[USER COMMAND][edit 1 l/P4]
+Oct 22, 2026 11:02:58 AM ponhub.ui.MainWindow executeCommand
+INFO: An error occurred while executing command: edit 1 l/P4
+Oct 22, 2026 11:02:59 AM ponhub.logic.CanonicalLogicManager execute
+INFO: ----------------[USER COMMAND][exit]
+Oct 22, 2026 11:02:59 AM ponhub.ui.MainWindow executeCommand
+INFO: Result: Exiting PonHub as requested ...
+Oct 22, 2026 11:02:59 AM ponhub.MainApp stop
+INFO: ============================ [ Stopping PonHub ] =============================
+Oct 22, 2026 11:03:10 AM ponhub.Main main
+WARNING: The warnings about a 'restricted method in java.lang.System' and 'enabling native access' appearing below (if any) can be ignored.
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by com.sun.glass.utils.NativeLibLoader in module javafx.graphics (jrt:/javafx.graphics)
+WARNING: Use --enable-native-access=javafx.graphics to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+sandbox_extension_issue_file_to_process failed for /tmp/mac-candidate-272-20261022/retry/Mac272RetryProtected.app: 1 (Operation not permitted)
+Oct 22, 2026 11:03:11 AM ponhub.MainApp init
+INFO: =============================[ Initializing PonHub ]===========================
+Oct 22, 2026 11:03:11 AM ponhub.MainApp initialize
+INFO: Using canonical data file : /private/tmp/mac-candidate-272-20261022/retry/protected/data/ponhub.json
+Oct 22, 2026 11:03:11 AM ponhub.MainApp initPrefs
+INFO: Using preference file : /private/tmp/mac-candidate-272-20261022/retry/protected/preferences.json
+Oct 22, 2026 11:03:11 AM ponhub.commons.util.JsonUtil readJsonFile
+INFO: JSON file /private/tmp/mac-candidate-272-20261022/retry/protected/preferences.json found.
+Oct 22, 2026 11:03:11 AM ponhub.MainApp start
+INFO: Starting PonHub v1.4
+Oct 22, 2026 11:03:11 AM ponhub.ui.UiManager start
+INFO: Starting UI...
+Oct 22, 2026 11:03:24 AM ponhub.logic.CanonicalLogicManager execute
+INFO: ----------------[USER COMMAND][list r/student]
+Oct 22, 2026 11:03:24 AM ponhub.ui.MainWindow executeCommand
+INFO: Result: Showing 2 student(s).
+Oct 22, 2026 11:03:25 AM ponhub.logic.CanonicalLogicManager execute
+INFO: ----------------[USER COMMAND][edit 1 l/P4]
+Oct 22, 2026 11:03:25 AM ponhub.ui.MainWindow executeCommand
+INFO: Result: Edited student: Alex Lee (S1).
+Oct 22, 2026 11:03:26 AM ponhub.logic.CanonicalLogicManager execute
+INFO: ----------------[USER COMMAND][edit 1 l/P3]
+Oct 22, 2026 11:03:26 AM ponhub.ui.MainWindow executeCommand
+INFO: Result: Edited student: Alex Lee (S1).
+Oct 22, 2026 11:03:27 AM ponhub.logic.CanonicalLogicManager execute
+INFO: ----------------[USER COMMAND][history 1 lid/L1]
+Oct 22, 2026 11:03:27 AM ponhub.ui.MainWindow executeCommand
+INFO: Result: Showing 1 attendance record(s).
+Oct 22, 2026 11:03:27 AM ponhub.logic.CanonicalLogicManager execute
+INFO: ----------------[USER COMMAND][exit]
+Oct 22, 2026 11:03:27 AM ponhub.ui.MainWindow executeCommand
+INFO: Result: Exiting PonHub as requested ...
+Oct 22, 2026 11:03:27 AM ponhub.MainApp stop
+INFO: ============================ [ Stopping PonHub ] =============================

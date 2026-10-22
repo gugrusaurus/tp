@@ -1,0 +1,9 @@
+{
+  "source": "ed32fe49901ea11070ff16086490d2d72adafcd1",
+  "bytes": 12654205,
+  "sha256": "5e24df511c9a5975c1c15e310ab03f2a852837e969359afe71fc8a37fa905456",
+  "manifest": "Manifest-Version: 1.0\r\nImplementation-Title: PonHub\r\nImplementation-Version: 1.4\r\nMain-Class: ponhub.Main\r\n\r\n",
+  "artifact_run": 39706371977,
+  "os": "ProductName:\t\tmacOS\nProductVersion:\t\t27.0.1\nBuildVersion:\t\t26A434\n",
+  "architecture": "arm64"
+}

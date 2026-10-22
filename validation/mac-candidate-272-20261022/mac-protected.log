@@ -1,0 +1,22 @@
+Oct 22, 2026 10:54:37 AM ponhub.Main main
+WARNING: The warnings about a 'restricted method in java.lang.System' and 'enabling native access' appearing below (if any) can be ignored.
+WARNING: A restricted method in java.lang.System has been called
+WARNING: java.lang.System::load has been called by com.sun.glass.utils.NativeLibLoader in module javafx.graphics (jrt:/javafx.graphics)
+WARNING: Use --enable-native-access=javafx.graphics to avoid a warning for callers in this module
+WARNING: Restricted methods will be blocked in a future release unless native access is enabled
+
+sandbox_extension_issue_file_to_process failed for /tmp/mac-candidate-272-20261022/MacCandidateProtected.app: 1 (Operation not permitted)
+Oct 22, 2026 10:54:37 AM ponhub.MainApp init
+INFO: =============================[ Initializing PonHub ]===========================
+Oct 22, 2026 10:54:37 AM ponhub.MainApp initialize
+INFO: Using canonical data file : /private/tmp/mac-candidate-272-20261022/protected-session/data/ponhub.json
+Oct 22, 2026 10:54:37 AM java.util.Optional ifPresent
+WARNING: Could not load canonical data at /private/tmp/mac-candidate-272-20261022/protected-session/data/ponhub.json (CORRUPT). The original file has not been changed. Operational writes are blocked for this session; only help, list and exit should be available. An empty view is not your saved data. Back up the original file. Restore a known-good supported file, correct its JSON/access permissions, or use a compatible build on a separate copy, then restart. Do not delete the original to bypass protection. Cause: Invalid JSON format: MALFORMED_JSON
+Oct 22, 2026 10:54:37 AM ponhub.MainApp initPrefs
+INFO: Using preference file : /private/tmp/mac-candidate-272-20261022/protected-session/preferences.json
+Oct 22, 2026 10:54:37 AM ponhub.MainApp initPrefs
+INFO: Creating new preference file /private/tmp/mac-candidate-272-20261022/protected-session/preferences.json
+Oct 22, 2026 10:54:37 AM ponhub.MainApp start
+INFO: Starting PonHub v1.4
+Oct 22, 2026 10:54:37 AM ponhub.ui.UiManager start
+INFO: Starting UI...
