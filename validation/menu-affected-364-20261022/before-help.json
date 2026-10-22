@@ -1,0 +1,37 @@
+{
+  "schemaVersion" : 1,
+  "people" : [ {
+    "id" : "T1",
+    "role" : "TUTOR",
+    "name" : "Mei Lim",
+    "phone" : "92345678"
+  }, {
+    "id" : "S1",
+    "role" : "STUDENT",
+    "name" : "Alex Tan",
+    "level" : "P3",
+    "parentPhone" : "91234567"
+  } ],
+  "personCounters" : {
+    "STUDENT" : 1,
+    "TUTOR" : 1,
+    "PARENT" : 0
+  },
+  "lastAllocatedLessonSequence" : 1,
+  "lessons" : [ {
+    "id" : "L1",
+    "tutorId" : "T1",
+    "day" : "Mon",
+    "startTime" : "1600",
+    "endTime" : "1730",
+    "subject" : "Math",
+    "room" : "R1",
+    "enrolledStudentIds" : [ ]
+  } ],
+  "attendance" : [ {
+    "studentId" : "S1",
+    "lessonId" : "L1",
+    "date" : "2026-10-05",
+    "status" : "present"
+  } ]
+}

@@ -1,0 +1,165 @@
+[
+  {
+    "session": "initial",
+    "command": "help",
+    "output": "Oct 22, 2026 9:53:49 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][help]\nOct 22, 2026 9:53:49 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: PonHub commands available in this build:\nadd - Add a student, tutor or parent\nUsage: add r/student n/NAME l/LEVEL pp/PARENT_PHONE [p/PHONE] [e/EMAIL] [a/ADDRESS]\n       add r/tutor|parent n/NAME p/PHONE [e/EMAIL] [a/ADDRESS]\nRoles and education levels are case-insensitive. Supply each lowercase prefix at most once.\nOptional values must be nonblank; l/ and pp/ are only allowed for students.\nExamples:\nadd r/student n/Alex Tan l/P1 pp/91234567\nadd r/tutor n/Mei Lim p/92345678 e/mei@example.com\nadd r/parent n/Sam Tan p/91234567 a/10 Main Road\n\nedit - Correct a person's details\nUsage: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [l/LEVEL] [pp/PARENT_PHONE]\nUse the current displayed people position and at least one field; omitted fields stay unchanged.\nOnly Students accept l/ and pp/. Blank e/ or a/ clears that value; blank p/ clears only a Student's phone.\nNames, Student levels/parent phones and Tutor/Parent phones cannot be cleared. Role and ID stay fixed.\nFilters are retained and search results refresh. Recheck displayed positions after editing.\nAn identical edit makes no write. Example: list r/student, then edit 1 l/P2 e/\n\naddlesson - Create an empty-roster shared lesson\nUsage: addlesson d/DAY st/HHMM et/HHMM s/SUBJECT tu/TUTOR_NAME [tp/TUTOR_PHONE] rm/ROOM\nDAY is Mon-Sun; times use four-digit 24-hour HHMM and start before end.\nTutor matching uses the normalized full name. Supply the exact phone to disambiguate.\nExample: addlesson d/Mon st/1600 et/1730 s/Math tu/Mei Lim rm/R1\n\neditlesson - Edit a shared lesson by stable ID\nUsage: editlesson lid/LESSON_ID [d/DAY] [st/HHMM] [et/HHMM] [s/SUBJECT] [tu/TUTOR_NAME] [tp/TUTOR_PHONE] [rm/ROOM]\nSupply a stable Lesson ID and at least one field; omitted fields stay unchanged.\nSupplied values must be nonblank; Lesson fields cannot be cleared.\nUse tp/ only with tu/. Tutor matching uses normalized full name and optional exact phone.\nThe complete edited slot must have start before end and must not clash for its tutor, room or Students.\nA weekday change cannot invalidate retained attendance; unmark incompatible records explicitly first.\nAn identical edit makes no write. Example: editlesson lid/L1 st/1630 s/Advanced Math\n\nenrol - Enrol a Student in a shared lesson\nUsage: enrol STUDENT_INDEX lid/LESSON_ID\nSTUDENT_INDEX is the current people-list position of a Student. LESSON_ID is stable.\nExample: enrol 1 lid/L1\n\nunenrol - Unenrol a Student from a shared lesson\nUsage: unenrol STUDENT_INDEX lid/LESSON_ID\nRemoves current membership only; retained dated attendance is unchanged.\nExample: unenrol 1 lid/L1\n\nmark - Record or correct dated lesson attendance\nUsage: mark STUDENT_INDEX lid/LESSON_ID d/YYYY-MM-DD s/present|absent\nThe date must be real and match the lesson weekday. New records require current enrolment;\nexisting history can be corrected after unenrolment.\nExample: mark 1 lid/L1 d/2026-10-05 s/present\n\nunmark - Remove one dated lesson attendance record\nUsage: unmark STUDENT_INDEX lid/LESSON_ID d/YYYY-MM-DD\nRemoves only that dated attendance record, including retained history after unenrolment.\nExample: unmark 1 lid/L1 d/2026-10-05\n\nhistory - Show a Student's retained attendance\nUsage: history STUDENT_INDEX [lid/LESSON_ID]\nShows retained dated attendance, newest first, then by stable Lesson ID.\nSTUDENT_INDEX selects a Student in the current people list.\nAn optional existing Lesson ID filters records.\nA missing record is unrecorded, not absent. Current and former membership are shown separately.\nThe people list and operational data remain unchanged.\nExample: after list r/student, history 1 lid/L1\n\ndelete - Delete an unreferenced person\nUsage: delete INDEX\nINDEX is the person's current position in the displayed people list.\nStudents with enrolments or retained attendance and tutors with assigned lessons cannot be deleted.\nDeleting a separate parent preserves students' parent-phone values.\nExample: list r/parent, then delete 1\n\ndeletelesson - Delete an unreferenced shared lesson\nUsage: deletelesson lid/LESSON_ID\nDeletes only an empty Lesson with no retained attendance. LESSON_ID is stable.\nUnenrol every Student and unmark every attendance record before deleting the Lesson.\nThe Lesson ID is never reused. Example: deletelesson lid/L1\n\nlist - Show all people or one role\nUse list or list r/student|tutor|parent, with at most one role filter.\n\nlessons - Show shared lessons or one student's enrolments\nUsage: lessons [si/STUDENT_INDEX]\nShows each shared lesson once, in creation order, including empty rosters.\nsi/ is an optional positive position in the current people list and must select a student.\nIt shows only that student's current enrolments; past attendance does not imply membership.\nLesson cards show stable IDs, schedule, tutor, room and roster size. Scroll to see more results.\nPeople filters and command positions are preserved. This command does not save data.\nExamples: lessons; after list r/student, lessons si/1 (if position 1 is the intended student)\n\nshowlesson - Show one lesson's roster and dated attendance\nUsage: showlesson lid/LESSON_ID [d/YYYY-MM-DD]\nShows one stable shared lesson, its tutor, schedule, room and current Student roster.\nThe two prefixes may appear in either order when a date is supplied.\nA real date must match the lesson weekday; current members show present, absent or unrecorded.\nFormer members' retained attendance appears separately. People positions are preserved.\nThis read-only view refreshes after saved changes. Example: showlesson lid/L1 d/2026-10-05\n\nsearch - Find people or shared lessons\nUsage: search c/student [n/NAME] [l/LEVEL] [p/PHONE] [pp/PARENT_PHONE] [e/EMAIL] [a/ADDRESS]\n       [d/DAY] [st/HHMM] [et/HHMM] [s/SUBJECT] [tu/TUTOR_NAME] [rm/ROOM]\n       search c/parent [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]\n       [sn/STUDENT_NAME] [d/DAY] [st/HHMM] [et/HHMM] [s/SUBJECT] [tu/TUTOR_NAME] [rm/ROOM]\n       search c/tutor [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]\n       [sn/STUDENT_NAME] [d/DAY] [st/HHMM] [et/HHMM] [s/SUBJECT] [rm/ROOM]\n       search c/lesson [sn/STUDENT_NAME] [d/DAY] [st/HHMM] [et/HHMM] [s/SUBJECT] [tu/TUTOR_NAME] [rm/ROOM]\nCategory values ignore case. Supply each lowercase prefix at most once, with a nonblank value.\nAll filters must match the same person. Name, email and address match text fragments ignoring case;\nname/address spaces are normalized. Level and phones match exactly; phone leading zeros matter.\nCategory-only searches include unlinked people. Missing optional contacts do not match filters.\nPeople results replace the people view and renumber current positions without saving.\nLesson results use a separate panel and preserve people filters and positions.\nAll lesson filters must match one lesson; sn/ matches its current roster. Text ignores case;\ntu/ matches tutor names. Day and HHMM times match exactly. When both times are given, end > start.\nEmpty lessons are included unless sn/ is supplied. Zero matches display an empty lesson panel.\nStudent lesson filters match one current enrolment and show its context below the student card.\nParent links use exact phone equality; sn/ and every lesson condition must match the same child.\nTutor conditions must match one assigned lesson and its current roster. Use n/ for tutor names.\nUse list or lessons to restore each view.\nExamples: search c/student n/Alex l/P1 pp/91234567, search c/lesson tu/mei d/Mon s/Math\n\nhelp - Show help or one command's guidance\nUsage: help [COMMAND]\nShows the commands available in this session, or syntax and an example for one command.\nCOMMAND is optional and case-insensitive. Supply at most one command word.\nExamples: help, help list\n\nexit - Close PonHub\nUsage: exit\nCloses PonHub. No parameters.\nExample: exit\n\n\nType help COMMAND for syntax and an example, e.g. help list.\n\nScroll this Result Display to read long guidance.\n"
+  },
+  {
+    "session": "initial",
+    "command": "add r/tutor n/Mei Lim p/92345678 e/mei@example.com",
+    "output": "Oct 22, 2026 9:53:50 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][add r/tutor n/Mei Lim p/92345678 e/mei@example.com]\nOct 22, 2026 9:53:50 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: New tutor added: Mei Lim (T1).\n"
+  },
+  {
+    "session": "initial",
+    "command": "addlesson d/Mon st/1600 et/1730 s/Math tu/Mei Lim rm/R1",
+    "output": "Oct 22, 2026 9:53:50 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][addlesson d/Mon st/1600 et/1730 s/Math tu/Mei Lim rm/R1]\nOct 22, 2026 9:53:50 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: New lesson added: L1.\n"
+  },
+  {
+    "session": "initial",
+    "command": "addlesson d/Mon st/1730 et/1830 s/Science tu/Mei Lim rm/R2",
+    "output": "Oct 22, 2026 9:53:50 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][addlesson d/Mon st/1730 et/1830 s/Science tu/Mei Lim rm/R2]\nOct 22, 2026 9:53:50 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: New lesson added: L2.\n"
+  },
+  {
+    "session": "initial",
+    "command": "add r/student n/Alex Tan l/S2 pp/91234567",
+    "output": "Oct 22, 2026 9:53:51 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][add r/student n/Alex Tan l/S2 pp/91234567]\nOct 22, 2026 9:53:51 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: New student added: Alex Tan (S1).\n"
+  },
+  {
+    "session": "initial",
+    "command": "add r/student n/Jamie Tan l/P1 pp/91234567",
+    "output": "Oct 22, 2026 9:53:51 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][add r/student n/Jamie Tan l/P1 pp/91234567]\nOct 22, 2026 9:53:51 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: New student added: Jamie Tan (S2).\n"
+  },
+  {
+    "session": "initial",
+    "command": "list r/student",
+    "output": "Oct 22, 2026 9:53:52 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][list r/student]\nOct 22, 2026 9:53:52 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Showing 2 student(s).\n"
+  },
+  {
+    "session": "initial",
+    "command": "enrol 1 lid/L1",
+    "output": "Oct 22, 2026 9:53:52 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][enrol 1 lid/L1]\nOct 22, 2026 9:53:52 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Student S1 enrolled in lesson L1.\n"
+  },
+  {
+    "session": "initial",
+    "command": "enrol 2 lid/L1",
+    "output": "Oct 22, 2026 9:53:52 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][enrol 2 lid/L1]\nOct 22, 2026 9:53:52 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Student S2 enrolled in lesson L1.\n"
+  },
+  {
+    "session": "initial",
+    "command": "edit 1 n/Alex Lee l/P3",
+    "output": "Oct 22, 2026 9:53:53 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][edit 1 n/Alex Lee l/P3]\nOct 22, 2026 9:53:53 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Edited student: Alex Lee (S1).\n"
+  },
+  {
+    "session": "initial",
+    "command": "editlesson lid/L1 st/1630 s/Advanced Math rm/R3",
+    "output": "Oct 22, 2026 9:53:53 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][editlesson lid/L1 st/1630 s/Advanced Math rm/R3]\nOct 22, 2026 9:53:53 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Edited lesson: L1.\n"
+  },
+  {
+    "session": "initial",
+    "command": "mark 1 lid/L1 d/2026-10-05 s/present",
+    "output": "Oct 22, 2026 9:53:53 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][mark 1 lid/L1 d/2026-10-05 s/present]\nOct 22, 2026 9:53:53 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Attendance for Student S1 in lesson L1 on 2026-10-05 marked present.\n"
+  },
+  {
+    "session": "initial",
+    "command": "mark 2 lid/L1 d/2026-10-05 s/absent",
+    "output": "Oct 22, 2026 9:53:54 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][mark 2 lid/L1 d/2026-10-05 s/absent]\nOct 22, 2026 9:53:54 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Attendance for Student S2 in lesson L1 on 2026-10-05 marked absent.\n"
+  },
+  {
+    "session": "initial",
+    "command": "edit 1 l/P7",
+    "rejected": true,
+    "output": "Oct 22, 2026 9:53:54 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][edit 1 l/P7]\nOct 22, 2026 9:53:54 AM ponhub.ui.MainWindow executeCommand\nINFO: An error occurred while executing command: edit 1 l/P7\n"
+  },
+  {
+    "session": "initial",
+    "command": "edit 1 n/Jamie Tan pp/91234567",
+    "rejected": true,
+    "output": "Oct 22, 2026 9:53:54 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][edit 1 n/Jamie Tan pp/91234567]\nOct 22, 2026 9:53:54 AM ponhub.ui.MainWindow executeCommand\nINFO: An error occurred while executing command: edit 1 n/Jamie Tan pp/91234567\n"
+  },
+  {
+    "session": "initial",
+    "command": "editlesson lid/L2 st/1700",
+    "rejected": true,
+    "output": "Oct 22, 2026 9:53:55 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][editlesson lid/L2 st/1700]\nOct 22, 2026 9:53:55 AM ponhub.ui.MainWindow executeCommand\nINFO: An error occurred while executing command: editlesson lid/L2 st/1700\n"
+  },
+  {
+    "session": "initial",
+    "command": "edit 1 n/ Alex   Lee l/p3",
+    "output": "Oct 22, 2026 9:53:55 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][edit 1 n/ Alex   Lee l/p3]\nOct 22, 2026 9:53:55 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: No changes to student: Alex Lee (S1).\n"
+  },
+  {
+    "session": "initial",
+    "command": "showlesson lid/L1 d/2026-10-05",
+    "output": "Oct 22, 2026 9:53:55 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][showlesson lid/L1 d/2026-10-05]\nOct 22, 2026 9:53:55 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Showing lesson L1 for 2026-10-05.\n"
+  },
+  {
+    "session": "initial",
+    "command": "mark 1 lid/L1 d/2026-10-05 s/absent",
+    "output": "Oct 22, 2026 9:53:56 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][mark 1 lid/L1 d/2026-10-05 s/absent]\nOct 22, 2026 9:53:56 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Attendance for Student S1 in lesson L1 on 2026-10-05 marked absent.\n"
+  },
+  {
+    "session": "initial",
+    "command": "unenrol 1 lid/L1",
+    "output": "Oct 22, 2026 9:53:56 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][unenrol 1 lid/L1]\nOct 22, 2026 9:53:56 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Student S1 unenrolled from lesson L1.\n"
+  },
+  {
+    "session": "initial",
+    "command": "history 1 lid/L1",
+    "output": "Oct 22, 2026 9:53:56 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][history 1 lid/L1]\nOct 22, 2026 9:53:56 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Showing 1 attendance record(s).\n"
+  },
+  {
+    "session": "initial",
+    "command": "exit",
+    "output": "Oct 22, 2026 9:53:57 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][exit]\nOct 22, 2026 9:53:57 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Exiting PonHub as requested ...\nOct 22, 2026 9:53:57 AM ponhub.MainApp stop\nINFO: ============================ [ Stopping PonHub ] =============================\n"
+  },
+  {
+    "session": "restart",
+    "command": "help",
+    "output": "Oct 22, 2026 9:53:59 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][help]\nOct 22, 2026 9:53:59 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: PonHub commands available in this build:\nadd - Add a student, tutor or parent\nUsage: add r/student n/NAME l/LEVEL pp/PARENT_PHONE [p/PHONE] [e/EMAIL] [a/ADDRESS]\n       add r/tutor|parent n/NAME p/PHONE [e/EMAIL] [a/ADDRESS]\nRoles and education levels are case-insensitive. Supply each lowercase prefix at most once.\nOptional values must be nonblank; l/ and pp/ are only allowed for students.\nExamples:\nadd r/student n/Alex Tan l/P1 pp/91234567\nadd r/tutor n/Mei Lim p/92345678 e/mei@example.com\nadd r/parent n/Sam Tan p/91234567 a/10 Main Road\n\nedit - Correct a person's details\nUsage: edit INDEX [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS] [l/LEVEL] [pp/PARENT_PHONE]\nUse the current displayed people position and at least one field; omitted fields stay unchanged.\nOnly Students accept l/ and pp/. Blank e/ or a/ clears that value; blank p/ clears only a Student's phone.\nNames, Student levels/parent phones and Tutor/Parent phones cannot be cleared. Role and ID stay fixed.\nFilters are retained and search results refresh. Recheck displayed positions after editing.\nAn identical edit makes no write. Example: list r/student, then edit 1 l/P2 e/\n\naddlesson - Create an empty-roster shared lesson\nUsage: addlesson d/DAY st/HHMM et/HHMM s/SUBJECT tu/TUTOR_NAME [tp/TUTOR_PHONE] rm/ROOM\nDAY is Mon-Sun; times use four-digit 24-hour HHMM and start before end.\nTutor matching uses the normalized full name. Supply the exact phone to disambiguate.\nExample: addlesson d/Mon st/1600 et/1730 s/Math tu/Mei Lim rm/R1\n\neditlesson - Edit a shared lesson by stable ID\nUsage: editlesson lid/LESSON_ID [d/DAY] [st/HHMM] [et/HHMM] [s/SUBJECT] [tu/TUTOR_NAME] [tp/TUTOR_PHONE] [rm/ROOM]\nSupply a stable Lesson ID and at least one field; omitted fields stay unchanged.\nSupplied values must be nonblank; Lesson fields cannot be cleared.\nUse tp/ only with tu/. Tutor matching uses normalized full name and optional exact phone.\nThe complete edited slot must have start before end and must not clash for its tutor, room or Students.\nA weekday change cannot invalidate retained attendance; unmark incompatible records explicitly first.\nAn identical edit makes no write. Example: editlesson lid/L1 st/1630 s/Advanced Math\n\nenrol - Enrol a Student in a shared lesson\nUsage: enrol STUDENT_INDEX lid/LESSON_ID\nSTUDENT_INDEX is the current people-list position of a Student. LESSON_ID is stable.\nExample: enrol 1 lid/L1\n\nunenrol - Unenrol a Student from a shared lesson\nUsage: unenrol STUDENT_INDEX lid/LESSON_ID\nRemoves current membership only; retained dated attendance is unchanged.\nExample: unenrol 1 lid/L1\n\nmark - Record or correct dated lesson attendance\nUsage: mark STUDENT_INDEX lid/LESSON_ID d/YYYY-MM-DD s/present|absent\nThe date must be real and match the lesson weekday. New records require current enrolment;\nexisting history can be corrected after unenrolment.\nExample: mark 1 lid/L1 d/2026-10-05 s/present\n\nunmark - Remove one dated lesson attendance record\nUsage: unmark STUDENT_INDEX lid/LESSON_ID d/YYYY-MM-DD\nRemoves only that dated attendance record, including retained history after unenrolment.\nExample: unmark 1 lid/L1 d/2026-10-05\n\nhistory - Show a Student's retained attendance\nUsage: history STUDENT_INDEX [lid/LESSON_ID]\nShows retained dated attendance, newest first, then by stable Lesson ID.\nSTUDENT_INDEX selects a Student in the current people list.\nAn optional existing Lesson ID filters records.\nA missing record is unrecorded, not absent. Current and former membership are shown separately.\nThe people list and operational data remain unchanged.\nExample: after list r/student, history 1 lid/L1\n\ndelete - Delete an unreferenced person\nUsage: delete INDEX\nINDEX is the person's current position in the displayed people list.\nStudents with enrolments or retained attendance and tutors with assigned lessons cannot be deleted.\nDeleting a separate parent preserves students' parent-phone values.\nExample: list r/parent, then delete 1\n\ndeletelesson - Delete an unreferenced shared lesson\nUsage: deletelesson lid/LESSON_ID\nDeletes only an empty Lesson with no retained attendance. LESSON_ID is stable.\nUnenrol every Student and unmark every attendance record before deleting the Lesson.\nThe Lesson ID is never reused. Example: deletelesson lid/L1\n\nlist - Show all people or one role\nUse list or list r/student|tutor|parent, with at most one role filter.\n\nlessons - Show shared lessons or one student's enrolments\nUsage: lessons [si/STUDENT_INDEX]\nShows each shared lesson once, in creation order, including empty rosters.\nsi/ is an optional positive position in the current people list and must select a student.\nIt shows only that student's current enrolments; past attendance does not imply membership.\nLesson cards show stable IDs, schedule, tutor, room and roster size. Scroll to see more results.\nPeople filters and command positions are preserved. This command does not save data.\nExamples: lessons; after list r/student, lessons si/1 (if position 1 is the intended student)\n\nshowlesson - Show one lesson's roster and dated attendance\nUsage: showlesson lid/LESSON_ID [d/YYYY-MM-DD]\nShows one stable shared lesson, its tutor, schedule, room and current Student roster.\nThe two prefixes may appear in either order when a date is supplied.\nA real date must match the lesson weekday; current members show present, absent or unrecorded.\nFormer members' retained attendance appears separately. People positions are preserved.\nThis read-only view refreshes after saved changes. Example: showlesson lid/L1 d/2026-10-05\n\nsearch - Find people or shared lessons\nUsage: search c/student [n/NAME] [l/LEVEL] [p/PHONE] [pp/PARENT_PHONE] [e/EMAIL] [a/ADDRESS]\n       [d/DAY] [st/HHMM] [et/HHMM] [s/SUBJECT] [tu/TUTOR_NAME] [rm/ROOM]\n       search c/parent [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]\n       [sn/STUDENT_NAME] [d/DAY] [st/HHMM] [et/HHMM] [s/SUBJECT] [tu/TUTOR_NAME] [rm/ROOM]\n       search c/tutor [n/NAME] [p/PHONE] [e/EMAIL] [a/ADDRESS]\n       [sn/STUDENT_NAME] [d/DAY] [st/HHMM] [et/HHMM] [s/SUBJECT] [rm/ROOM]\n       search c/lesson [sn/STUDENT_NAME] [d/DAY] [st/HHMM] [et/HHMM] [s/SUBJECT] [tu/TUTOR_NAME] [rm/ROOM]\nCategory values ignore case. Supply each lowercase prefix at most once, with a nonblank value.\nAll filters must match the same person. Name, email and address match text fragments ignoring case;\nname/address spaces are normalized. Level and phones match exactly; phone leading zeros matter.\nCategory-only searches include unlinked people. Missing optional contacts do not match filters.\nPeople results replace the people view and renumber current positions without saving.\nLesson results use a separate panel and preserve people filters and positions.\nAll lesson filters must match one lesson; sn/ matches its current roster. Text ignores case;\ntu/ matches tutor names. Day and HHMM times match exactly. When both times are given, end > start.\nEmpty lessons are included unless sn/ is supplied. Zero matches display an empty lesson panel.\nStudent lesson filters match one current enrolment and show its context below the student card.\nParent links use exact phone equality; sn/ and every lesson condition must match the same child.\nTutor conditions must match one assigned lesson and its current roster. Use n/ for tutor names.\nUse list or lessons to restore each view.\nExamples: search c/student n/Alex l/P1 pp/91234567, search c/lesson tu/mei d/Mon s/Math\n\nhelp - Show help or one command's guidance\nUsage: help [COMMAND]\nShows the commands available in this session, or syntax and an example for one command.\nCOMMAND is optional and case-insensitive. Supply at most one command word.\nExamples: help, help list\n\nexit - Close PonHub\nUsage: exit\nCloses PonHub. No parameters.\nExample: exit\n\n\nType help COMMAND for syntax and an example, e.g. help list.\n\nScroll this Result Display to read long guidance.\n"
+  },
+  {
+    "session": "restart",
+    "command": "list r/student",
+    "output": "Oct 22, 2026 9:53:59 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][list r/student]\nOct 22, 2026 9:53:59 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Showing 2 student(s).\n"
+  },
+  {
+    "session": "restart",
+    "command": "lessons",
+    "output": "Oct 22, 2026 9:53:59 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][lessons]\nOct 22, 2026 9:53:59 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Showing 2 lesson(s).\n"
+  },
+  {
+    "session": "restart",
+    "command": "lessons si/1",
+    "output": "Oct 22, 2026 9:54:00 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][lessons si/1]\nOct 22, 2026 9:54:00 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Showing 0 lesson(s).\n"
+  },
+  {
+    "session": "restart",
+    "command": "lessons si/2",
+    "output": "Oct 22, 2026 9:54:00 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][lessons si/2]\nOct 22, 2026 9:54:00 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Showing 1 lesson(s).\n"
+  },
+  {
+    "session": "restart",
+    "command": "showlesson lid/L1 d/2026-10-05",
+    "output": "Oct 22, 2026 9:54:00 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][showlesson lid/L1 d/2026-10-05]\nOct 22, 2026 9:54:00 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Showing lesson L1 for 2026-10-05.\n"
+  },
+  {
+    "session": "restart",
+    "command": "history 1 lid/L1",
+    "output": "Oct 22, 2026 9:54:01 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][history 1 lid/L1]\nOct 22, 2026 9:54:01 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Showing 1 attendance record(s).\n"
+  },
+  {
+    "session": "restart",
+    "command": "mark 1 lid/L1 d/2026-10-05 s/absent",
+    "output": "Oct 22, 2026 9:54:01 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][mark 1 lid/L1 d/2026-10-05 s/absent]\nOct 22, 2026 9:54:01 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Attendance for Student S1 in lesson L1 on 2026-10-05 is already marked absent. No changes made.\n"
+  },
+  {
+    "session": "restart",
+    "command": "mark 2 lid/L1 d/2026-10-05 s/absent",
+    "output": "Oct 22, 2026 9:54:01 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][mark 2 lid/L1 d/2026-10-05 s/absent]\nOct 22, 2026 9:54:01 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Attendance for Student S2 in lesson L1 on 2026-10-05 is already marked absent. No changes made.\n"
+  },
+  {
+    "session": "restart",
+    "command": "exit",
+    "output": "Oct 22, 2026 9:54:02 AM ponhub.logic.CanonicalLogicManager execute\nINFO: ----------------[USER COMMAND][exit]\nOct 22, 2026 9:54:02 AM ponhub.ui.MainWindow executeCommand\nINFO: Result: Exiting PonHub as requested ...\nOct 22, 2026 9:54:02 AM ponhub.MainApp stop\nINFO: ============================ [ Stopping PonHub ] =============================\n"
+  }
+]

@@ -1,0 +1,12 @@
+{
+  "application_source": "052e6443ab771d089355c51f7512b30c30f03375",
+  "replacement_pr": 373,
+  "previous_pr": 368,
+  "jar_bytes": 12654259,
+  "jar_sha256": "fb24845c2a3bc02f445c8a16ed34d8ddc040515e67d233e06fa8586b38bd18f7",
+  "mac_f1_draft_filter_history_bytes": "PASS",
+  "mac_popup_manual_report": "Vincent previously reported works; open-popup screenshots pending",
+  "linux_package": "PASS: run 39758810233, 32 entries, no physical-popup claim",
+  "windows_native_menu": "PENDING Vincent runtime/hash/screenshots",
+  "final_integrated_candidate": "NOT SELECTED by this evidence"
+}

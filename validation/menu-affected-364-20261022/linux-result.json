@@ -1,0 +1,18 @@
+{
+  "passed": true,
+  "source": "052e6443ab771d089355c51f7512b30c30f03375",
+  "platform": "Linux-6.17.0-1022-azure-x86_64-with-glibc2.39",
+  "architecture": "x86_64",
+  "display": ":99",
+  "expected_sha256": "fb24845c2a3bc02f445c8a16ed34d8ddc040515e67d233e06fa8586b38bd18f7",
+  "os_release": "PRETTY_NAME=\"Ubuntu 24.04.5 LTS\"\nNAME=\"Ubuntu\"\nVERSION_ID=\"24.04\"\nVERSION=\"24.04.5 LTS (Noble Numbat)\"\nVERSION_CODENAME=noble\nID=ubuntu\nID_LIKE=debian\nHOME_URL=\"https://www.ubuntu.com/\"\nSUPPORT_URL=\"https://help.ubuntu.com/\"\nBUG_REPORT_URL=\"https://bugs.launchpad.net/ubuntu/\"\nPRIVACY_POLICY_URL=\"https://www.ubuntu.com/legal/terms-and-policies/privacy-policy\"\nUBUNTU_CODENAME=noble\nLOGO=ubuntu-logo\n",
+  "scope": "Actual packaged-JAR X11 automation; no manual physical-display check",
+  "jar_sha256": "fb24845c2a3bc02f445c8a16ed34d8ddc040515e67d233e06fa8586b38bd18f7",
+  "jar_bytes": 12654259,
+  "manifest": {
+    "Manifest-Version": "1.0",
+    "Implementation-Title": "PonHub",
+    "Implementation-Version": "1.4",
+    "Main-Class": "ponhub.Main"
+  }
+}

@@ -1,0 +1,63 @@
+Window: "PonHub", App: PonHubMenu364.
+0 standard window PonHub, URL: file:///private/tmp/ponhub-menu364-preview/PonHub, Secondary Actions: Raise
+	1 text Pon Hub
+	2 menu bar
+		3 text File
+			4 text File
+		5 text Help
+			6 text Help
+	7 button (disabled) Lessons
+		8 text Lessons
+	9 button (disabled) Student lessons
+		10 text Student lessons
+	11 button (disabled) Attendance
+		12 text Attendance
+	13 text entry area Showing 1 attendance record(s).
+		14 scroll area
+			15 text Showing 1 attendance record(s).
+	16 text Showing 1 person(s).
+		17 text Showing 1 person(s).
+	18 list
+		19 row (selectable)
+			20 text 1. Alex Tan
+				21 text 1. Alex Tan
+			22 text Student · S1
+				23 text Student · S1
+			24 text Level: P3
+				25 text Level: P3
+			26 text Parent phone: 91234567
+				27 text Parent phone: 91234567
+			28 text Own phone: Not provided
+				29 text Own phone: Not provided
+			30 text Email: Not provided
+				31 text Email: Not provided
+			32 text Address: Not provided
+				33 text Address: Not provided
+		34 scroll bar 0
+			35 value indicator 0
+	36 text Student S1 · attendance history · L1 Showing 1 attendance record(s).
+	37 list
+		38 row (selectable) 2026-10-05 · L1 · present · former enrolment
+			39 text 2026-10-05 · L1 · present · former enrolment
+		40 row (selectable)
+		41 row (selectable)
+		42 row (selectable)
+		43 row (selectable)
+		44 row (selectable)
+		45 row (selectable)
+		46 row (selectable)
+		47 row (selectable)
+		48 row (selectable)
+	49 text field (settable) edit 1 n/Unfinished
+		50 text edit 1 n/Unfinished
+	51 text /private/tmp/ponhub-menu364-preview/data/ponhub.json
+		52 text /private/tmp/ponhub-menu364-preview/data/ponhub.json
+	53 close button
+	54 full screen button Help: this button also has an action to zoom the window, Secondary Actions: zoom the window
+	55 minimize button
+	56 image (disabled) PonHub
+	57 text PonHub
+58 menu bar
+	59 PonHubMenu364
+
+The focused UI element is 49 text field (settable) edit 1 n/Unfinished
